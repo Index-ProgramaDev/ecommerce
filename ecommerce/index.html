@@ -1,107 +1,112 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Bernardo — Full Stack Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>LUXE - E-commerce Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f5f5f0;
+            --accent: #d4a574;
+            --accent-dark: #b8935f;
+            --text: #2c2c2c;
+            --text-light: #666;
+            --border: #e0e0d8;
+            --success: #4a7c59;
+            --warning: #d4a574;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg-primary: #0F0F0F;
-            --bg-secondary: #1A1A1A;
-            --bg-tertiary: #252525;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B4B4B4;
-            --text-muted: #6B6B6B;
-            --accent: #00D4FF;
-            --accent-dim: #0088AA;
-            --gold: #F4C430;
-            --border: #2A2A2A;
-        }
-
         body {
-            font-family: 'Urbanist', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            background: var(--secondary);
+            color: var(--text);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        .font-serif {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Animated gradient background */
-        .gradient-mesh {
-            position: fixed;
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.15;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(244, 196, 48, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(0, 136, 170, 0.25) 0%, transparent 60%);
-            animation: meshMove 20s ease-in-out infinite;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow);
         }
 
-        @keyframes meshMove {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(5deg); }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
         }
 
-        .content {
-            position: relative;
-            z-index: 1;
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
         }
 
-        /* Navigation */
-        nav {
-            backdrop-filter: blur(20px);
-            background: rgba(15, 15, 15, 0.8);
-            border-bottom: 1px solid var(--border);
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(15, 15, 15, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        nav a {
             position: relative;
-            transition: color 0.3s ease;
         }
 
-        nav a::after {
+        .nav-item::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -5px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 1px;
             background: var(--accent);
             transition: width 0.3s ease;
         }
 
-        nav a:hover::after {
+        .nav-item:hover::after {
             width: 100%;
         }
 
-        /* Animations */
+        .nav-item.active {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -109,1213 +114,923 @@
             }
         }
 
-        .animate-in {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
-
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-
-        /* Hero section */
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 700;
-            line-height: 0.95;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #FFFFFF 0%, #B4B4B4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-accent {
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        /* Profile image */
-        .profile-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .profile-image {
-            width: 100%;
-            aspect-ratio: 3/4;
-            border-radius: 8px;
-            overflow: hidden;
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 2px;
             border: 1px solid var(--border);
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
             position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
 
-        .profile-image::before {
+        .stat-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(244, 196, 48, 0.1));
-            opacity: 0;
-            transition: opacity 0.5s;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s ease;
         }
 
-        .profile-image:hover::before {
-            opacity: 1;
-        }
-
-        .profile-placeholder {
-            width: 100%;
+        .stat-card:hover::before {
             height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--shadow);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .stat-change.positive {
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            color: #c44545;
+        }
+
+        .content-section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px var(--shadow);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8rem;
-            font-weight: 300;
-            color: var(--text-muted);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
         }
 
-        .profile-glow {
+        .product-image::before {
+            content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.15), transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-            pointer-events: none;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.05); }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Cards */
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+        .product-info {
+            padding: 1.5rem;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(244, 196, 48, 0.05));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        /* Stats */
-        .stat-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: var(--accent);
-            background: var(--bg-tertiary);
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1;
-            background: linear-gradient(135deg, var(--accent), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dim));
-            color: var(--bg-primary);
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--gold), var(--accent));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .btn-primary:hover::before {
-            opacity: 1;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Skills */
-        .skill-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 1.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            border-color: var(--accent);
-            background: var(--bg-tertiary);
-        }
-
-        .skill-bar-bg {
-            height: 6px;
-            background: var(--bg-tertiary);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 0.75rem;
-        }
-
-        .skill-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-            border-radius: 3px;
-            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-            width: 0;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .skill-bar.animate {
-            width: var(--progress);
-        }
-
-        /* Tags */
-        .tag {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            font-size: 0.8125rem;
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
             font-weight: 500;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
         }
 
-        .tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2.5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            bottom: 2rem;
-            width: 2px;
-            background: linear-gradient(180deg, var(--accent), transparent);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -2.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 3px solid var(--bg-primary);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-        }
-
-        /* Project cards */
-        .project-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.2);
-        }
-
-        .project-image {
-            width: 100%;
-            aspect-ratio: 16/10;
-            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(244, 196, 48, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .project-card:hover .project-image::before {
-            opacity: 1;
-        }
-
-        /* Social links */
-        .social-link {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            background: var(--bg-secondary);
-        }
-
-        .social-link:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
-        }
-
-        /* Decorative elements */
-        .section-label {
-            font-size: 0.8125rem;
-            font-weight: 600;
+        .product-category {
+            font-size: 0.85rem;
+            color: var(--text-light);
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
+            letter-spacing: 1px;
             margin-bottom: 1rem;
         }
 
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 5rem 0;
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
         }
 
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .product-stock {
+            font-size: 0.85rem;
+            color: var(--text-light);
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .chart-container {
+            height: 350px;
+            margin-top: 1.5rem;
         }
 
-        /* Mobile menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100vh;
-            background: var(--bg-primary);
-            transition: right 0.4s ease;
-            z-index: 1000;
-            padding: 2rem;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .profile-placeholder {
-                font-size: 5rem;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .stat-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .timeline {
-                padding-left: 2rem;
-            }
-
-            .timeline-dot {
-                left: -2rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Accent decorations */
-        .accent-line {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-            border-radius: 2px;
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
             margin-bottom: 2rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--secondary);
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: var(--secondary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-success {
+            background: rgba(74, 124, 89, 0.1);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: rgba(212, 165, 116, 0.1);
+            color: var(--accent-dark);
+        }
+
+        .badge-danger {
+            background: rgba(196, 69, 69, 0.1);
+            color: #c44545;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 1rem 0;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .tab.active {
+            color: var(--primary);
+        }
+
+        .tab.active::after {
+            width: 100%;
+        }
+
+        .tab:hover {
+            color: var(--primary);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Gradient mesh background -->
-    <div class="gradient-mesh"></div>
-
-    <div class="content">
-        <!-- Navigation -->
-        <nav class="fixed top-0 w-full z-50" id="nav">
-            <div class="max-w-7xl mx-auto px-6 py-5">
-                <div class="flex justify-between items-center">
-                    <a href="#home" class="text-lg font-bold tracking-tight">
-                        <span class="text-white">Daniel</span>
-                        <span class="text-accent">.</span>
-                    </a>
-                    <div class="hidden md:flex items-center gap-10 text-sm font-medium">
-                        <a href="#work" class="text-text-secondary hover:text-white">Trabalhos</a>
-                        <a href="#about" class="text-text-secondary hover:text-white">Sobre</a>
-                        <a href="#skills" class="text-text-secondary hover:text-white">Skills</a>
-                        <a href="#experience" class="text-text-secondary hover:text-white">Experiência</a>
-                        <a href="#contact" class="text-text-secondary hover:text-white">Contato</a>
-                    </div>
-                    <button class="md:hidden text-white" id="menu-toggle">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 6h18M3 12h18M3 18h18"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+    <header class="header">
+        <div class="logo">LUXE</div>
+        <nav class="nav">
+            <a href="#" class="nav-item active" data-tab="dashboard">Dashboard</a>
+            <a href="#" class="nav-item" data-tab="products">Produtos</a>
+            <a href="#" class="nav-item" data-tab="analytics">Analytics</a>
+            <a href="#" class="nav-item" data-tab="orders">Pedidos</a>
         </nav>
+    </header>
 
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobile-menu">
-            <div class="flex justify-end mb-12">
-                <button id="menu-close" class="text-white">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 6l12 12M18 6L6 18"/>
-                    </svg>
-                </button>
+    <div class="container">
+        <!-- Dashboard Tab -->
+        <div id="dashboard-content" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="stat-card" style="animation-delay: 0.1s;">
+                    <div class="stat-label">Receita Total</div>
+                    <div class="stat-value">R$ 847.2K</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> 23.5% vs mês anterior
+                    </div>
+                </div>
+
+                <div class="stat-card" style="animation-delay: 0.2s;">
+                    <div class="stat-label">Pedidos</div>
+                    <div class="stat-value">1,284</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> 12.3% vs mês anterior
+                    </div>
+                </div>
+
+                <div class="stat-card" style="animation-delay: 0.3s;">
+                    <div class="stat-label">Taxa de Conversão</div>
+                    <div class="stat-value">3.8%</div>
+                    <div class="stat-change negative">
+                        <span>↓</span> 0.4% vs mês anterior
+                    </div>
+                </div>
+
+                <div class="stat-card" style="animation-delay: 0.4s;">
+                    <div class="stat-label">Ticket Médio</div>
+                    <div class="stat-value">R$ 659</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> 8.2% vs mês anterior
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col gap-8 text-3xl font-semibold">
-                <a href="#work" class="menu-link hover:text-accent transition-colors">Trabalhos</a>
-                <a href="#about" class="menu-link hover:text-accent transition-colors">Sobre</a>
-                <a href="#skills" class="menu-link hover:text-accent transition-colors">Skills</a>
-                <a href="#experience" class="menu-link hover:text-accent transition-colors">Experiência</a>
-                <a href="#contact" class="menu-link hover:text-accent transition-colors">Contato</a>
+
+            <div class="analytics-grid">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Vendas nos Últimos 7 Dias</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Categorias</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Produtos Mais Vendidos</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Categoria</th>
+                                <th>Vendas</th>
+                                <th>Receita</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Relógio Clássico Premium</strong></td>
+                                <td>Acessórios</td>
+                                <td>247</td>
+                                <td>R$ 178.560</td>
+                                <td><span class="badge badge-success">Em Estoque</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bolsa de Couro Artesanal</strong></td>
+                                <td>Bolsas</td>
+                                <td>189</td>
+                                <td>R$ 151.200</td>
+                                <td><span class="badge badge-success">Em Estoque</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Óculos de Sol Designer</strong></td>
+                                <td>Acessórios</td>
+                                <td>156</td>
+                                <td>R$ 93.600</td>
+                                <td><span class="badge badge-warning">Estoque Baixo</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Carteira Minimalista</strong></td>
+                                <td>Acessórios</td>
+                                <td>134</td>
+                                <td>R$ 40.200</td>
+                                <td><span class="badge badge-success">Em Estoque</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Perfume Exclusive Edition</strong></td>
+                                <td>Fragrâncias</td>
+                                <td>98</td>
+                                <td>R$ 68.600</td>
+                                <td><span class="badge badge-danger">Esgotado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center px-6 pt-20">
-            <div class="max-w-7xl mx-auto w-full">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="space-y-8">
-                        <div class="animate-in">
-                            <div class="section-label">Full Stack Developer & Designer</div>
-                            <h1 class="hero-title">
-                                Criando
-                                <br/>
-                                Experiências
-                                <br/>
-                                <span class="hero-accent font-serif">Digitais</span>
-                            </h1>
-                        </div>
-                        <p class="text-xl text-text-secondary leading-relaxed max-w-xl animate-in delay-100">
-                            Transformo ideias complexas em produtos digitais elegantes e funcionais. 
-                            Especialista em desenvolvimento full-stack e design de interfaces modernas.
-                        </p>
-                        <div class="flex flex-wrap gap-4 animate-in delay-200">
-                            <a href="#contact" class="btn btn-primary">
-                                <span>Iniciar Projeto</span>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 10h10M10 5l5 5-5 5"/>
-                                </svg>
-                            </a>
-                            <a href="#work" class="btn btn-outline">
-                                <span>Ver Trabalhos</span>
-                            </a>
+        <!-- Products Tab -->
+        <div id="products-content" class="tab-content hidden">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Catálogo de Produtos</h2>
+                    <button class="btn">Adicionar Produto</button>
+                </div>
+
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">⌚</div>
+                        <div class="product-info">
+                            <div class="product-category">Acessórios</div>
+                            <h3 class="product-name">Relógio Clássico Premium</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 1.299</span>
+                                <span class="product-stock">247 unidades</span>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="animate-in delay-300">
-                        <div class="profile-wrapper mx-auto">
-                            <div class="profile-glow"></div>
-                            <div class="profile-image">
-                                <!-- SUBSTITUA COM SUA FOTO -->
-                                <div class="profile-placeholder">DB</div>
-                                <!-- Para adicionar foto:
-                                <img src="sua-foto.jpg" alt="Daniel Bernardo" class="w-full h-full object-cover">
-                                -->
+
+                    <div class="product-card">
+                        <div class="product-image">👜</div>
+                        <div class="product-info">
+                            <div class="product-category">Bolsas</div>
+                            <h3 class="product-name">Bolsa de Couro Artesanal</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 799</span>
+                                <span class="product-stock">189 unidades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">🕶️</div>
+                        <div class="product-info">
+                            <div class="product-category">Acessórios</div>
+                            <h3 class="product-name">Óculos de Sol Designer</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 599</span>
+                                <span class="product-stock">156 unidades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">💼</div>
+                        <div class="product-info">
+                            <div class="product-category">Acessórios</div>
+                            <h3 class="product-name">Carteira Minimalista</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 299</span>
+                                <span class="product-stock">134 unidades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">🎩</div>
+                        <div class="product-info">
+                            <div class="product-category">Acessórios</div>
+                            <h3 class="product-name">Chapéu Panamá Elegante</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 459</span>
+                                <span class="product-stock">87 unidades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">🌺</div>
+                        <div class="product-info">
+                            <div class="product-category">Fragrâncias</div>
+                            <h3 class="product-name">Perfume Exclusive Edition</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 699</span>
+                                <span class="product-stock">0 unidades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">👔</div>
+                        <div class="product-info">
+                            <div class="product-category">Acessórios</div>
+                            <h3 class="product-name">Gravata de Seda Italiana</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 349</span>
+                                <span class="product-stock">203 unidades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">💍</div>
+                        <div class="product-info">
+                            <div class="product-category">Joias</div>
+                            <h3 class="product-name">Anel de Prata Artesanal</h3>
+                            <div class="product-footer">
+                                <span class="product-price">R$ 899</span>
+                                <span class="product-stock">65 unidades</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="py-20 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="stat-card reveal">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">Anos de Experiência</div>
-                    </div>
-                    <div class="stat-card reveal">
-                        <div class="stat-number">80+</div>
-                        <div class="stat-label">Projetos Entregues</div>
-                    </div>
-                    <div class="stat-card reveal">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Clientes Felizes</div>
-                    </div>
-                    <div class="stat-card reveal">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Tecnologias</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Work Section -->
-        <section id="work" class="py-20 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-16 reveal">
-                    <div class="section-label">Portfolio</div>
-                    <h2 class="section-title">Projetos Selecionados</h2>
-                    <div class="accent-line"></div>
-                    <p class="text-lg text-text-secondary max-w-2xl">
-                        Uma coleção curada de trabalhos que demonstram minha abordagem para resolver 
-                        problemas complexos através de design inteligente e código limpo.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="project-card reveal">
-                        <div class="project-image">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                                <path d="M8 21h8M12 17v4"/>
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-3">Plataforma E-commerce</h3>
-                            <p class="text-text-secondary mb-4 leading-relaxed">
-                                Sistema completo de vendas online com painel administrativo, 
-                                gestão de estoque e analytics em tempo real.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="tag">React</span>
-                                <span class="tag">Node.js</span>
-                                <span class="tag">PostgreSQL</span>
-                                <span class="tag">Stripe</span>
-                            </div>
-                            <a href="#" class="text-accent hover:underline font-medium inline-flex items-center gap-2">
-                                Ver projeto
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 8h10M8 3l5 5-5 5"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <div class="project-image">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-3">Dashboard SaaS</h3>
-                            <p class="text-text-secondary mb-4 leading-relaxed">
-                                Interface de analytics com visualizações interativas e 
-                                engine customizado de processamento de dados.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="tag">Next.js</span>
-                                <span class="tag">TypeScript</span>
-                                <span class="tag">D3.js</span>
-                                <span class="tag">AWS</span>
-                            </div>
-                            <a href="#" class="text-accent hover:underline font-medium inline-flex items-center gap-2">
-                                Ver projeto
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 8h10M8 3l5 5-5 5"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <div class="project-image">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="5" y="2" width="14" height="20" rx="2"/>
-                                <path d="M12 18h.01"/>
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-3">App Mobile</h3>
-                            <p class="text-text-secondary mb-4 leading-relaxed">
-                                Aplicativo de produtividade cross-platform com 
-                                sincronização em tempo real e modo offline.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="tag">React Native</span>
-                                <span class="tag">Redux</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">GraphQL</span>
-                            </div>
-                            <a href="#" class="text-accent hover:underline font-medium inline-flex items-center gap-2">
-                                Ver projeto
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 8h10M8 3l5 5-5 5"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <div class="project-image">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                                <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
-                                <polyline points="7.5 19.79 7.5 14.6 3 12"/>
-                                <polyline points="21 12 16.5 14.6 16.5 19.79"/>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                                <line x1="12" y1="22.08" x2="12" y2="12"/>
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-semibold mb-3">Website Corporativo</h3>
-                            <p class="text-text-secondary mb-4 leading-relaxed">
-                                Site institucional de alta performance com CMS headless 
-                                e otimização avançada de SEO.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="tag">Next.js</span>
-                                <span class="tag">Tailwind</span>
-                                <span class="tag">Contentful</span>
-                                <span class="tag">Vercel</span>
-                            </div>
-                            <a href="#" class="text-accent hover:underline font-medium inline-flex items-center gap-2">
-                                Ver projeto
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 8h10M8 3l5 5-5 5"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="divider"></div>
         </div>
 
-        <!-- About Section -->
-        <section id="about" class="py-20 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-16">
-                    <div class="reveal space-y-6">
-                        <div>
-                            <div class="section-label">Conheça-me</div>
-                            <h2 class="section-title">Sobre Mim</h2>
-                            <div class="accent-line"></div>
-                        </div>
-                        <div class="space-y-4 text-lg text-text-secondary leading-relaxed">
-                            <p>
-                                Olá! Sou <span class="text-white font-semibold">Daniel Bernardo</span>, 
-                                um desenvolvedor full-stack e designer apaixonado por criar experiências 
-                                digitais que fazem a diferença.
-                            </p>
-                            <p>
-                                Com mais de <span class="text-accent font-semibold">5 anos de experiência</span>, 
-                                trabalhei com startups inovadoras e empresas estabelecidas, criando desde 
-                                aplicações web complexas até sistemas móveis escaláveis.
-                            </p>
-                            <p>
-                                Minha abordagem combina expertise técnica profunda com um olhar aguçado 
-                                para design. Acredito que código limpo e interfaces intuitivas são 
-                                essenciais para produtos digitais bem-sucedidos.
-                            </p>
-                            <p>
-                                Quando não estou codando, você me encontrará explorando novas tecnologias, 
-                                contribuindo para projetos open source ou compartilhando conhecimento 
-                                com a comunidade dev.
-                            </p>
-                        </div>
-                    </div>
+        <!-- Analytics Tab -->
+        <div id="analytics-content" class="tab-content hidden">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Métricas Detalhadas</h2>
+                </div>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="detailedChart"></canvas>
+                </div>
+            </div>
 
-                    <div class="reveal grid grid-cols-2 gap-6">
-                        <div class="card">
-                            <div class="text-4xl mb-4">🎯</div>
-                            <h3 class="text-xl font-semibold mb-2">Foco</h3>
-                            <p class="text-text-secondary text-sm">
-                                Qualidade acima de tudo, com atenção aos mínimos detalhes
-                            </p>
-                        </div>
-                        <div class="card">
-                            <div class="text-4xl mb-4">⚡</div>
-                            <h3 class="text-xl font-semibold mb-2">Performance</h3>
-                            <p class="text-text-secondary text-sm">
-                                Otimização constante para máxima eficiência
-                            </p>
-                        </div>
-                        <div class="card">
-                            <div class="text-4xl mb-4">🎨</div>
-                            <h3 class="text-xl font-semibold mb-2">Design</h3>
-                            <p class="text-text-secondary text-sm">
-                                Interfaces elegantes que encantam usuários
-                            </p>
-                        </div>
-                        <div class="card">
-                            <div class="text-4xl mb-4">🚀</div>
-                            <h3 class="text-xl font-semibold mb-2">Inovação</h3>
-                            <p class="text-text-secondary text-sm">
-                                Sempre explorando tecnologias de ponta
-                            </p>
-                        </div>
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Visitantes Únicos</div>
+                    <div class="stat-value">47.2K</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> 18.7% vs mês anterior
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Taxa de Rejeição</div>
+                    <div class="stat-value">42.3%</div>
+                    <div class="stat-change positive">
+                        <span>↓</span> 5.2% vs mês anterior
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Tempo Médio no Site</div>
+                    <div class="stat-value">4m 37s</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> 23s vs mês anterior
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Páginas por Sessão</div>
+                    <div class="stat-value">5.8</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> 1.2 vs mês anterior
                     </div>
                 </div>
             </div>
-        </section>
 
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="divider"></div>
+            <div class="analytics-grid">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Fontes de Tráfego</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Top 5 Cidades</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cidade</th>
+                                    <th>Vendas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>São Paulo</td>
+                                    <td>R$ 342.5K</td>
+                                </tr>
+                                <tr>
+                                    <td>Rio de Janeiro</td>
+                                    <td>R$ 198.7K</td>
+                                </tr>
+                                <tr>
+                                    <td>Brasília</td>
+                                    <td>R$ 127.3K</td>
+                                </tr>
+                                <tr>
+                                    <td>Belo Horizonte</td>
+                                    <td>R$ 89.4K</td>
+                                </tr>
+                                <tr>
+                                    <td>Curitiba</td>
+                                    <td>R$ 67.8K</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-16 reveal">
-                    <div class="section-label">Expertise</div>
-                    <h2 class="section-title">Minhas Skills</h2>
-                    <div class="accent-line"></div>
-                    <p class="text-lg text-text-secondary max-w-2xl">
-                        Um conjunto abrangente de habilidades técnicas e criativas, 
-                        constantemente aprimoradas através de projetos desafiadores.
-                    </p>
+        <!-- Orders Tab -->
+        <div id="orders-content" class="tab-content hidden">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Pedidos Recentes</h2>
+                    <button class="btn btn-secondary">Exportar</button>
                 </div>
-
-                <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <div class="space-y-6 reveal">
-                        <h3 class="text-2xl font-semibold mb-6">Desenvolvimento</h3>
-                        
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">React / Next.js</span>
-                                <span class="text-accent text-sm font-semibold">95%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 95%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">JavaScript / TypeScript</span>
-                                <span class="text-accent text-sm font-semibold">92%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 92%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">Node.js / Express</span>
-                                <span class="text-accent text-sm font-semibold">88%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 88%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">Python / Django</span>
-                                <span class="text-accent text-sm font-semibold">85%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-6 reveal">
-                        <h3 class="text-2xl font-semibold mb-6">Design & DevOps</h3>
-                        
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">UI/UX Design</span>
-                                <span class="text-accent text-sm font-semibold">90%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 90%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">Figma / Adobe XD</span>
-                                <span class="text-accent text-sm font-semibold">87%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 87%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">AWS / Docker</span>
-                                <span class="text-accent text-sm font-semibold">83%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 83%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium">Git / CI/CD</span>
-                                <span class="text-accent text-sm font-semibold">91%</span>
-                            </div>
-                            <div class="skill-bar-bg">
-                                <div class="skill-bar" style="--progress: 91%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reveal">
-                    <h3 class="text-xl font-semibold mb-6">Stack Completo</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="tag">HTML5 & CSS3</span>
-                        <span class="tag">Tailwind CSS</span>
-                        <span class="tag">Vue.js</span>
-                        <span class="tag">Angular</span>
-                        <span class="tag">GraphQL</span>
-                        <span class="tag">REST APIs</span>
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">MongoDB</span>
-                        <span class="tag">Redis</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">Vercel</span>
-                        <span class="tag">Netlify</span>
-                        <span class="tag">Kubernetes</span>
-                        <span class="tag">Jest</span>
-                        <span class="tag">Cypress</span>
-                        <span class="tag">Webpack</span>
-                        <span class="tag">Vite</span>
-                        <span class="tag">Three.js</span>
-                    </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID do Pedido</th>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#ORD-1284</strong></td>
+                                <td>Maria Silva Santos</td>
+                                <td>04/02/2026 14:23</td>
+                                <td>R$ 2.347,00</td>
+                                <td><span class="badge badge-success">Entregue</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1283</strong></td>
+                                <td>João Pedro Oliveira</td>
+                                <td>04/02/2026 13:45</td>
+                                <td>R$ 1.598,00</td>
+                                <td><span class="badge badge-warning">Em Trânsito</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1282</strong></td>
+                                <td>Ana Carolina Costa</td>
+                                <td>04/02/2026 11:15</td>
+                                <td>R$ 899,00</td>
+                                <td><span class="badge badge-warning">Processando</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1281</strong></td>
+                                <td>Carlos Eduardo Lima</td>
+                                <td>03/02/2026 18:30</td>
+                                <td>R$ 3.247,00</td>
+                                <td><span class="badge badge-success">Entregue</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1280</strong></td>
+                                <td>Fernanda Rodrigues</td>
+                                <td>03/02/2026 16:22</td>
+                                <td>R$ 1.299,00</td>
+                                <td><span class="badge badge-warning">Em Trânsito</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1279</strong></td>
+                                <td>Rafael Mendes</td>
+                                <td>03/02/2026 14:10</td>
+                                <td>R$ 549,00</td>
+                                <td><span class="badge badge-danger">Cancelado</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1278</strong></td>
+                                <td>Patricia Almeida</td>
+                                <td>03/02/2026 10:45</td>
+                                <td>R$ 2.899,00</td>
+                                <td><span class="badge badge-success">Entregue</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </section>
-
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="divider"></div>
         </div>
-
-        <!-- Experience Section -->
-        <section id="experience" class="py-20 px-6">
-            <div class="max-w-5xl mx-auto">
-                <div class="mb-16 reveal">
-                    <div class="section-label">Carreira</div>
-                    <h2 class="section-title">Experiência Profissional</h2>
-                    <div class="accent-line"></div>
-                    <p class="text-lg text-text-secondary max-w-2xl">
-                        Minha jornada através de empresas inovadoras e projetos desafiadores 
-                        que moldaram minha expertise.
-                    </p>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item reveal">
-                        <div class="timeline-dot"></div>
-                        <div class="card">
-                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                                <div>
-                                    <h3 class="text-2xl font-semibold mb-2">Senior Full Stack Developer</h3>
-                                    <p class="text-lg text-text-secondary">Tech Innovation Labs</p>
-                                </div>
-                                <span class="text-sm text-accent font-semibold mt-2 md:mt-0">2022 — Presente</span>
-                            </div>
-                            <p class="text-text-secondary leading-relaxed mb-4">
-                                Liderança técnica no desenvolvimento de aplicações enterprise usando arquitetura 
-                                de microsserviços. Implementação de práticas DevOps e mentoria de desenvolvedores júnior. 
-                                Responsável por decisões arquiteturais críticas que melhoraram a escalabilidade em 300%.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tag">React</span>
-                                <span class="tag">Node.js</span>
-                                <span class="tag">AWS</span>
-                                <span class="tag">Docker</span>
-                                <span class="tag">Kubernetes</span>
-                                <span class="tag">PostgreSQL</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                        <div class="timeline-dot"></div>
-                        <div class="card">
-                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                                <div>
-                                    <h3 class="text-2xl font-semibold mb-2">Full Stack Developer</h3>
-                                    <p class="text-lg text-text-secondary">Digital Solutions Agency</p>
-                                </div>
-                                <span class="text-sm text-accent font-semibold mt-2 md:mt-0">2020 — 2022</span>
-                            </div>
-                            <p class="text-text-secondary leading-relaxed mb-4">
-                                Desenvolvimento de aplicações web customizadas para clientes corporativos. 
-                                Especialização em MERN stack e integrações complexas de APIs. 
-                                Otimização de performance que reduziu tempos de carregamento em 60%.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tag">MongoDB</span>
-                                <span class="tag">Express</span>
-                                <span class="tag">React</span>
-                                <span class="tag">Node.js</span>
-                                <span class="tag">Redux</span>
-                                <span class="tag">GraphQL</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item reveal">
-                        <div class="timeline-dot"></div>
-                        <div class="card">
-                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                                <div>
-                                    <h3 class="text-2xl font-semibold mb-2">Frontend Developer</h3>
-                                    <p class="text-lg text-text-secondary">Creative Startup</p>
-                                </div>
-                                <span class="text-sm text-accent font-semibold mt-2 md:mt-0">2019 — 2020</span>
-                            </div>
-                            <p class="text-text-secondary leading-relaxed mb-4">
-                                Criação de interfaces modernas e responsivas com foco excepcional em UX/UI. 
-                                Desenvolvimento de bibliotecas de componentes reutilizáveis e implementação 
-                                de animações complexas que aumentaram engajamento em 80%.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tag">Vue.js</span>
-                                <span class="tag">SASS</span>
-                                <span class="tag">Figma</span>
-                                <span class="tag">GSAP</span>
-                                <span class="tag">Webpack</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="divider"></div>
-        </div>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16 reveal">
-                    <div class="section-label">Entre em Contato</div>
-                    <h2 class="section-title">Vamos Criar Algo Incrível</h2>
-                    <div class="accent-line mx-auto"></div>
-                    <p class="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        Estou sempre aberto a discutir novos projetos, oportunidades criativas 
-                        ou parcerias. Vamos conversar!
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                    <div class="card reveal">
-                        <h3 class="text-2xl font-semibold mb-6">Informações de Contato</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center flex-shrink-0">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent">
-                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-text-muted mb-1">Email</p>
-                                    <a href="mailto:daniel@exemplo.com" class="text-lg hover:text-accent transition-colors">
-                                        daniel@exemplo.com
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center flex-shrink-0">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent">
-                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-text-muted mb-1">Telefone</p>
-                                    <a href="tel:+5511999999999" class="text-lg hover:text-accent transition-colors">
-                                        +55 11 99999-9999
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center flex-shrink-0">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent">
-                                        <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                        <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-text-muted mb-1">Localização</p>
-                                    <p class="text-lg">Brasil • Remoto</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card reveal">
-                        <h3 class="text-2xl font-semibold mb-6">Redes Sociais</h3>
-                        <div class="grid grid-cols-4 gap-4 mb-8">
-                            <a href="https://github.com/danielbernardo" target="_blank" class="social-link">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                            </a>
-                            <a href="https://linkedin.com/in/danielbernardo" target="_blank" class="social-link">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                </svg>
-                            </a>
-                            <a href="https://twitter.com/danielbernardo" target="_blank" class="social-link">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                                </svg>
-                            </a>
-                            <a href="https://dribbble.com/danielbernardo" target="_blank" class="social-link">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm7.88 9.45c-.43-.17-1.13-.4-2.05-.63.19-.76.32-1.51.4-2.23 1.54.94 2.68 2.38 3.03 4.11-.44.22-.96.43-1.54.64-.03-.64-.11-1.28-.24-1.89zM12 2.18c1.63 0 3.14.48 4.42 1.29-.96.58-2.07 1.02-3.29 1.29-.38-.6-.79-1.17-1.23-1.71.36-.05.73-.08 1.1-.08zm-2.32.38c.47.6.9 1.22 1.3 1.88-.91.19-1.88.3-2.88.3-.46 0-.91-.02-1.35-.06.64-1.21 1.66-2.18 2.93-2.76.03.03.06.07.09.1zM2.18 12c0-.22.01-.44.03-.66.54.04 1.11.06 1.71.06 1.42 0 2.77-.17 4.01-.48-.13.7-.2 1.42-.2 2.16 0 1.11.17 2.18.48 3.19-2.48-1.03-4.28-3.37-4.61-6.13-.15-.04-.28-.09-.42-.14zm7.19 9.64c-.93-.47-1.77-1.11-2.46-1.89.61-.22 1.27-.39 1.97-.51.26.84.61 1.64 1.05 2.38-.19.01-.38.02-.56.02zm2.63.18c-.47-.77-.86-1.6-1.16-2.48 1.07-.15 2.22-.23 3.42-.23.61 0 1.2.02 1.77.06-.69 1.48-2.02 2.58-3.63 2.91-.13-.09-.27-.17-.4-.26zM21.82 12c0 .61-.06 1.21-.17 1.79-.54-.04-1.11-.06-1.71-.06-1.53 0-2.99.19-4.34.52.31-1.01.48-2.08.48-3.19 0-.72-.07-1.43-.2-2.11 1.14-.26 2.18-.64 3.08-1.12 1.44 1.13 2.43 2.83 2.76 4.77.07.13.1.27.1.4z"/>
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <p class="text-sm text-text-muted mb-2">Disponibilidade</p>
-                                <p class="text-text-secondary">
-                                    Aberto para projetos freelance e oportunidades full-time
-                                </p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-text-muted mb-2">Resposta</p>
-                                <p class="text-text-secondary">
-                                    Geralmente respondo em até 24 horas
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-12 px-6 border-t border-border">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div class="text-center md:text-left">
-                        <p class="text-text-secondary mb-2">© 2026 Daniel Bernardo. Todos os direitos reservados.</p>
-                        <p class="text-text-muted text-sm">Desenvolvido com paixão e café ☕</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="#home" class="text-text-muted hover:text-accent transition-colors text-sm">Topo</a>
-                        <span class="text-text-muted">•</span>
-                        <a href="#work" class="text-text-muted hover:text-accent transition-colors text-sm">Trabalhos</a>
-                        <span class="text-text-muted">•</span>
-                        <a href="#contact" class="text-text-muted hover:text-accent transition-colors text-sm">Contato</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 
     <script>
-        // Mobile menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuClose = document.getElementById('menu-close');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuLinks = document.querySelectorAll('.menu-link');
-
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-
-        menuClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
+        // Tab Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding content
+                const tab = this.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+                document.getElementById(`${tab}-content`).classList.remove('hidden');
             });
         });
 
-        // Navbar scroll
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
+        // Sales Chart
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'Vendas (R$)',
+                    data: [95000, 112000, 108000, 134000, 147000, 163000, 88000],
+                    borderColor: '#d4a574',
+                    backgroundColor: 'rgba(212, 165, 116, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#d4a574',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + (value / 1000) + 'K';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
             }
         });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Category Chart
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Acessórios', 'Bolsas', 'Fragrâncias', 'Joias'],
+                datasets: [{
+                    data: [45, 28, 17, 10],
+                    backgroundColor: [
+                        '#d4a574',
+                        '#b8935f',
+                        '#4a7c59',
+                        '#2c2c2c'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
                 }
-            });
+            }
         });
 
-        // Reveal on scroll
-        const reveals = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+        // Detailed Analytics Chart
+        const detailedCtx = document.getElementById('detailedChart').getContext('2d');
+        new Chart(detailedCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                    label: 'Receita 2025',
+                    data: [685000, 742000, 698000, 789000, 834000, 912000, 847000, 0, 0, 0, 0, 0],
+                    backgroundColor: '#d4a574',
+                    borderRadius: 4
+                }, {
+                    label: 'Receita 2024',
+                    data: [542000, 598000, 612000, 654000, 689000, 723000, 698000, 745000, 782000, 814000, 856000, 923000],
+                    backgroundColor: '#e0e0d8',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + (value / 1000) + 'K';
+                            }
+                        }
+                    }
                 }
-            });
-        }, { threshold: 0.1 });
+            }
+        });
 
-        reveals.forEach(reveal => revealObserver.observe(reveal));
-
-        // Skill bars
-        const skillBars = document.querySelectorAll('.skill-bar');
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
+        // Traffic Chart
+        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+        new Chart(trafficCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Orgânico', 'Direto', 'Redes Sociais', 'Referência', 'Email'],
+                datasets: [{
+                    data: [38, 25, 19, 12, 6],
+                    backgroundColor: [
+                        '#d4a574',
+                        '#b8935f',
+                        '#4a7c59',
+                        '#2c2c2c',
+                        '#666666'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            padding: 15,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
                 }
-            });
-        }, { threshold: 0.5 });
-
-        skillBars.forEach(bar => skillObserver.observe(bar));
+            }
+        });
     </script>
 </body>
 </html>
